@@ -97,4 +97,3 @@ primeFactorization n = filter isPrime [x | x <- [1..n], rem n x == 0]
 
 prob5 :: Integer -> Integer -> Bool
 prob5 n k = last (primeFactorization n) < k
-
