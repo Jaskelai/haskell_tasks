@@ -85,5 +85,16 @@ prob4 n = if n > 0 then prob4 (n - 1) + prob4 (n - 2) else prob4 (n + 2) - prob4
 --
 -- Числа n и k положительны и не превосходят 10^8.
 -- Число 1 не считается простым числом
+
+isPrime :: Integer -> Bool
+isPrime n
+    | n == 1 = False
+    | (length [x | x <- [2 .. n-1], mod n x == 0]) > 0 = False
+    | otherwise = True
+
+primeFactorization :: Integer -> [Integer]
+primeFactorization n = filter isPrime [x | x <- [1..n], rem n x == 0]
+
 prob5 :: Integer -> Integer -> Bool
-prob5 = error "Implement me!"
+prob5 n k = last (primeFactorization n) < k
+
