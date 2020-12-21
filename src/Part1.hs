@@ -51,7 +51,8 @@ prob2 n = if even n then div n 2 else n * 3 + 1
 --
 -- Для любой функции step и n == 1 ответом будет 0.
 prob3 :: (Integer -> Integer) -> Integer -> Integer
-prob3 step n = error "Implement me!"
+prob3 _ 1 = 0
+prob3 step n = prob3 step (step n) + 1
 
 
 ------------------------------------------------------------
