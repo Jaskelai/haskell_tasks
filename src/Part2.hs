@@ -18,8 +18,14 @@ prob6 x = case x of
 --
 -- Написать функцию, которая проверяет, что значения
 -- находятся в диапазоне от 0 до 255 (границы входят)
+getInt :: ColorPart -> Int
+getInt x = case x of
+    Red int   -> int
+    Green int -> int
+    Blue int  -> int
+
 prob7 :: ColorPart -> Bool
-prob7 = error "Implement me!"
+prob7 x = getInt x >= 0 && getInt x <= 255
 
 ------------------------------------------------------------
 -- PROBLEM #8
