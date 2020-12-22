@@ -41,7 +41,7 @@ prob8 = error "Implement me!"
 -- Написать функцию, которая возвращает значение из
 -- ColorPart
 prob9 :: ColorPart -> Int
-prob9 = error "Implement me!"
+prob9 = getInt
 
 ------------------------------------------------------------
 -- PROBLEM #10
