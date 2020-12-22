@@ -20,9 +20,9 @@ prob6 x = case x of
 -- находятся в диапазоне от 0 до 255 (границы входят)
 getInt :: ColorPart -> Int
 getInt x = case x of
-    Red int   -> int
+    Red int -> int
     Green int -> int
-    Blue int  -> int
+    Blue int -> int
 
 prob7 :: ColorPart -> Bool
 prob7 x = getInt x >= 0 && getInt x <= 255
@@ -33,7 +33,10 @@ prob7 x = getInt x >= 0 && getInt x <= 255
 -- Написать функцию, которая добавляет в соответствующее
 -- поле значения Color значение из ColorPart
 prob8 :: Color -> ColorPart -> Color
-prob8 = error "Implement me!"
+prob8 x y = case y of
+    Red int -> x { red = red x + int }
+    Green int -> x { green = green x + int }
+    Blue int -> x { blue = blue x + int }
 
 ------------------------------------------------------------
 -- PROBLEM #9
