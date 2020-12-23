@@ -5,7 +5,10 @@ module Part3 where
 --
 -- Проверить, является ли число N простым (1 <= N <= 10^9)
 prob18 :: Integer -> Bool
-prob18 = error "Implement me!"
+prob18 n
+    | n == 1 = False
+    | (length [x | x <- [2 .. n-1], mod n x == 0]) > 0 = False
+    | otherwise = True
 
 ------------------------------------------------------------
 -- PROBLEM #19
