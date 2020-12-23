@@ -64,7 +64,9 @@ prob10 (Color r g b)
 --
 -- Найти сумму элементов дерева
 prob11 :: Num a => Tree a -> a
-prob11 (Tree _left _root _right) = _root + (if isJust _left then prob11 $ fromJust _left else 0) + (if isJust _right then prob11 $ fromJust _right else 0)
+prob11 (Tree _left _root _right) = _root + 
+                                  (if isJust _left then prob11 $ fromJust _left else 0) +
+                                   (if isJust _right then prob11 $ fromJust _right else 0)
 
 ------------------------------------------------------------
 -- PROBLEM #12
@@ -93,7 +95,11 @@ checkSide (Just tree) parent isRight = case isRight of
 -- поддерево, в корне которого находится значение, если оно
 -- есть в дереве поиска; если его нет - вернуть Nothing
 prob13 :: Ord a => a -> Tree a -> Maybe (Tree a)
-prob13 = error "Implement me!"
+prob13 x tree
+  | root tree == x = Just tree
+  | root tree > x = if isJust (left tree) then prob13 x $ fromJust (left tree) else Nothing
+  | root tree < x = if isJust (right tree) then prob13 x $ fromJust (right tree) else Nothing
+  | otherwise = Nothing
 
 ------------------------------------------------------------
 -- PROBLEM #14
