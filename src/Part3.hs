@@ -1,5 +1,7 @@
 module Part3 where
 
+import Data.Map (fromListWith, toList)
+
 ------------------------------------------------------------
 -- PROBLEM #18
 --
@@ -17,7 +19,32 @@ prob18 n
 -- разложении числа N (1 <= N <= 10^9). Простые делители
 -- должны быть расположены по возрастанию
 prob19 :: Integer -> [(Integer, Int)]
-prob19 = error "Implement me!"
+prob19 x = map (\d -> (d, factorize d x)) (primeDivisors x)
+
+primeDivisors :: Integer -> [Integer]
+primeDivisors x = filter prob18 (getDivisors x)
+
+factorize :: Integer -> Integer -> Int
+factorize divisor number
+  | number `mod` divisor == 0 = 1 + factorize divisor (number `div` divisor)
+  | otherwise = 0
+  
+roundedCount :: Integral a => a -> a
+roundedCount x = round (sqrt (fromIntegral x))
+
+getDivisors :: Integer -> [Integer]
+getDivisors n = halfDivisors ++ getAllDivisors n halfDivisors []
+  where
+    halfDivisors = filter isDivisor [1..(roundedCount n)]
+    isDivisor candidate = n `mod` candidate == 0
+
+getAllDivisors :: Integer -> [Integer] -> [Integer] -> [Integer]
+getAllDivisors n [] acc = acc
+getAllDivisors n (x:xs) acc =
+  let a = (n `div` x)
+  in if a == x
+    then getAllDivisors n xs acc
+    else getAllDivisors n xs (a : acc)
 
 ------------------------------------------------------------
 -- PROBLEM #20
