@@ -1,5 +1,6 @@
 module Part3 where
 
+import Data.List (sort)
 import Data.Map (fromListWith, toList)
 
 ------------------------------------------------------------
@@ -63,8 +64,11 @@ prob20 x = x == sum (factorization x)
 --
 -- Вернуть список всех делителей числа N (1<=N<=10^10) в
 -- порядке возрастания
+factorizationIncluding :: Integer -> [Integer]
+factorizationIncluding n = [x | x <- [1..n], rem n x == 0]
+
 prob21 :: Integer -> [Integer]
-prob21 = error "Implement me!"
+prob21 = factorizationIncluding
 
 ------------------------------------------------------------
 -- PROBLEM #22
