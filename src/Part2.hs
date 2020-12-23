@@ -52,7 +52,11 @@ prob9 = getInt
 -- Написать функцию, которая возвращает компонент Color, у
 -- которого наибольшее значение (если такой единственный)
 prob10 :: Color -> Maybe ColorPart
-prob10 = error "Implement me!"
+prob10 (Color r g b) 
+    | r > g && r > b = Just (Red r)
+    | g > r && g > b = Just (Green g)
+    | b > g && b > r = Just (Blue b)
+    | otherwise = Nothing
 
 ------------------------------------------------------------
 -- PROBLEM #11
