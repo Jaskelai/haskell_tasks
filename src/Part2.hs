@@ -64,7 +64,7 @@ prob10 (Color r g b)
 --
 -- Найти сумму элементов дерева
 prob11 :: Num a => Tree a -> a
-prob11 (Tree l m r) = m + (if isJust l then prob11 $ fromJust l else 0) + (if isJust r then prob11 $ fromJust r else 0)
+prob11 (Tree _left _root _right) = _root + (if isJust _left then prob11 $ fromJust _left else 0) + (if isJust _right then prob11 $ fromJust _right else 0)
 
 ------------------------------------------------------------
 -- PROBLEM #12
@@ -75,7 +75,16 @@ prob11 (Tree l m r) = m + (if isJust l then prob11 $ fromJust l else 0) + (if is
 -- а все элементы правого поддерева -- не меньше элемента
 -- в узле)
 prob12 :: Ord a => Tree a -> Bool
-prob12 = error "Implement me!"
+prob12 = checkTree
+
+checkTree :: Ord a => Tree a -> Bool
+checkTree tree = checkSide (left tree) (root tree) False && checkSide (right tree) (root tree) True
+
+checkSide :: Ord a => Maybe (Tree a) -> a -> Bool -> Bool
+checkSide Nothing _ _ = True
+checkSide (Just tree) parent isRight = case isRight of 
+    True -> root tree >= parent && checkTree tree
+    False -> root tree < parent && checkTree tree
 
 ------------------------------------------------------------
 -- PROBLEM #13
