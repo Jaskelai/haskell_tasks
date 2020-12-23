@@ -1,6 +1,7 @@
 module Part2 where
 
 import Part2.Types
+import Data.Maybe (isJust, fromJust)
 
 ------------------------------------------------------------
 -- PROBLEM #6
@@ -52,7 +53,7 @@ prob9 = getInt
 -- Написать функцию, которая возвращает компонент Color, у
 -- которого наибольшее значение (если такой единственный)
 prob10 :: Color -> Maybe ColorPart
-prob10 (Color r g b) 
+prob10 (Color r g b)
     | r > g && r > b = Just (Red r)
     | g > r && g > b = Just (Green g)
     | b > g && b > r = Just (Blue b)
@@ -63,7 +64,7 @@ prob10 (Color r g b)
 --
 -- Найти сумму элементов дерева
 prob11 :: Num a => Tree a -> a
-prob11 = error "Implement me!"
+prob11 (Tree l m r) = m + (if isJust l then prob11 $ fromJust l else 0) + (if isJust r then prob11 $ fromJust r else 0)
 
 ------------------------------------------------------------
 -- PROBLEM #12
