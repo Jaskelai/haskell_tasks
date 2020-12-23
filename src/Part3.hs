@@ -28,7 +28,7 @@ factorize :: Integer -> Integer -> Int
 factorize divisor number
   | number `mod` divisor == 0 = 1 + factorize divisor (number `div` divisor)
   | otherwise = 0
-  
+
 roundedCount :: Integral a => a -> a
 roundedCount x = round (sqrt (fromIntegral x))
 
@@ -52,8 +52,11 @@ getAllDivisors n (x:xs) acc =
 -- Проверить, является ли число N совершенным (1<=N<=10^10)
 -- Совершенное число равно сумме своих делителей (меньших
 -- самого числа)
+factorization :: Integer -> [Integer]
+factorization n = [x | x <- [1..n-1], rem n x == 0]
+
 prob20 :: Integer -> Bool
-prob20 = error "Implement me!"
+prob20 x = x == sum (factorization x)
 
 ------------------------------------------------------------
 -- PROBLEM #21
