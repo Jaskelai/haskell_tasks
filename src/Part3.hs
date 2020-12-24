@@ -1,6 +1,6 @@
 module Part3 where
 
-import Data.List (sort)
+import Data.List (genericLength)
 import Data.Map (fromListWith, toList)
 
 ------------------------------------------------------------
@@ -9,9 +9,9 @@ import Data.Map (fromListWith, toList)
 -- Проверить, является ли число N простым (1 <= N <= 10^9)
 prob18 :: Integer -> Bool
 prob18 n
-    | n == 1 = False
-    | n == 2 = True
-    | otherwise = all (\p -> n `mod` p /= 0) (takeWhile (\p -> p * p <= n) (2 : filter prob18 [3, 5 ..]))
+  | n == 1 = False
+  | n == 2 = True
+  | otherwise = all (\p -> n `mod` p /= 0) (takeWhile (\p -> p * p <= n) (2 : filter prob18 [3, 5 ..]))
 
 ------------------------------------------------------------
 -- PROBLEM #19
@@ -36,16 +36,16 @@ roundedCount x = round (sqrt (fromIntegral x))
 getDivisors :: Integer -> [Integer]
 getDivisors n = halfDivisors ++ getAllDivisors n halfDivisors []
   where
-    halfDivisors = filter isDivisor [1..(roundedCount n)]
+    halfDivisors = filter isDivisor [1 .. (roundedCount n)]
     isDivisor candidate = mod n candidate == 0
 
 getAllDivisors :: Integer -> [Integer] -> [Integer] -> [Integer]
 getAllDivisors _ [] acc = acc
-getAllDivisors n (x:xs) acc =
+getAllDivisors n (x : xs) acc =
   let a = div n x
-  in if a == x
-    then getAllDivisors n xs acc
-    else getAllDivisors n xs (a : acc)
+   in if a == x
+        then getAllDivisors n xs acc
+        else getAllDivisors n xs (a : acc)
 
 ------------------------------------------------------------
 -- PROBLEM #20
@@ -70,7 +70,9 @@ prob21 = getDivisors
 -- Подсчитать произведение количеств букв i в словах из
 -- заданной строки (списка символов)
 prob22 :: String -> Integer
-prob22 = error "Implement me!"
+prob22 str = product ( map mapper (words str))
+  where
+    mapper _str = genericLength (filter (== 'i') _str)
 
 ------------------------------------------------------------
 -- PROBLEM #23
