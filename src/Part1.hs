@@ -97,6 +97,7 @@ primeFactors :: Integer -> [Integer]
 primeFactors = factorize 2
 
 factorize :: Integer -> Integer -> [Integer]
+factorize _ 1 = [] 
 factorize d n 
    | d * d > n = [n]
    | mod n d == 0 = d : factorize d ( div n d)
