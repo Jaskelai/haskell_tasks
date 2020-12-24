@@ -120,7 +120,7 @@ reversal = go 0
 -- сумма делителей одного (без учёта самого числа) равна
 -- другому, и наоборот
 prob26 :: Integer -> Integer -> Bool
-prob26 = error "Implement me!"
+prob26 x y = sum (getDivisors x) == sum (getDivisors y)
 
 ------------------------------------------------------------
 -- PROBLEM #27
