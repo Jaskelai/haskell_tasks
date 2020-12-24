@@ -90,14 +90,14 @@ calcFibonacci n
 -- Числа n и k положительны и не превосходят 10^8.
 -- Число 1 не считается простым числом
 
-isPrime :: Integer -> Bool
-isPrime n
-    | n == 1 = False
-    | (length [x | x <- [2 .. n-1], mod n x == 0]) > 0 = False
-    | otherwise = True
-
-primeFactorization :: Integer -> [Integer]
-primeFactorization n = filter isPrime [x | x <- [1..n], rem n x == 0]
-
 prob5 :: Integer -> Integer -> Bool
-prob5 n k = last (primeFactorization n) < k
+prob5 n k = all (< k) (primeFactors n) 
+
+primeFactors :: Integer -> [Integer]
+primeFactors = factorize 2
+
+factorize :: Integer -> Integer -> [Integer]
+factorize d n 
+   | d * d > n = [n]
+   | mod n d == 0 = d : factorize d ( div n d)
+   | otherwise = factorize (d + 1) n
