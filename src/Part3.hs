@@ -27,7 +27,7 @@ primeDivisors x = filter prob18 (getDivisors x)
 
 factorize :: Integer -> Integer -> Int
 factorize divisor number
-  | number `mod` divisor == 0 = 1 + factorize divisor (number `div` divisor)
+  | mod number divisor == 0 = 1 + factorize divisor (div number divisor)
   | otherwise = 0
 
 roundedCount :: Integral a => a -> a
@@ -37,12 +37,12 @@ getDivisors :: Integer -> [Integer]
 getDivisors n = halfDivisors ++ getAllDivisors n halfDivisors []
   where
     halfDivisors = filter isDivisor [1..(roundedCount n)]
-    isDivisor candidate = n `mod` candidate == 0
+    isDivisor candidate = mod n candidate == 0
 
 getAllDivisors :: Integer -> [Integer] -> [Integer] -> [Integer]
-getAllDivisors n [] acc = acc
+getAllDivisors _ [] acc = acc
 getAllDivisors n (x:xs) acc =
-  let a = (n `div` x)
+  let a = div n x
   in if a == x
     then getAllDivisors n xs acc
     else getAllDivisors n xs (a : acc)
@@ -53,22 +53,16 @@ getAllDivisors n (x:xs) acc =
 -- Проверить, является ли число N совершенным (1<=N<=10^10)
 -- Совершенное число равно сумме своих делителей (меньших
 -- самого числа)
-factorization :: Integer -> [Integer]
-factorization n = [x | x <- [1..n-1], rem n x == 0]
-
 prob20 :: Integer -> Bool
-prob20 x = x == sum (factorization x)
+prob20 x = x == sum (init (getDivisors x))
 
 ------------------------------------------------------------
 -- PROBLEM #21
 --
 -- Вернуть список всех делителей числа N (1<=N<=10^10) в
 -- порядке возрастания
-factorizationIncluding :: Integer -> [Integer]
-factorizationIncluding n = [x | x <- [1..n], rem n x == 0]
-
 prob21 :: Integer -> [Integer]
-prob21 = factorizationIncluding
+prob21 = getDivisors
 
 ------------------------------------------------------------
 -- PROBLEM #22
