@@ -92,7 +92,12 @@ prob23 = error "Implement me!"
 -- представить как сумму чисел от 1 до какого-то K
 -- (1 <= N <= 10^10)
 prob24 :: Integer -> Bool
-prob24 = error "Implement me!"
+prob24 number = checkSum 1 0
+    where
+        checkSum _num _sum
+            | _sum == number = True
+            | _sum > number = False
+            | otherwise = checkSum (_num + 1) (_sum + _num)
 
 ------------------------------------------------------------
 -- PROBLEM #25
