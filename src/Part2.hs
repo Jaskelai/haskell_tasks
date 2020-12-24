@@ -97,7 +97,7 @@ checkSide (Just tree) parent isRight = case isRight of
 prob13 :: Ord a => a -> Tree a -> Maybe (Tree a)
 prob13 x tree
   | root tree == x = Just tree
-  | root tree > x = if isJust (left tree) then prob13 x $ fromJust (left tree) else Nothing
+  | root tree > x = maybe Nothing (prob13 x) (left tree)
   | root tree < x = if isJust (right tree) then prob13 x $ fromJust (right tree) else Nothing
   | otherwise = Nothing
 
@@ -115,7 +115,9 @@ prob14 = error "Implement me!"
 -- Выполнить вращение дерева влево относительно корня
 -- (https://en.wikipedia.org/wiki/Tree_rotation)
 prob15 :: Tree a -> Tree a
-prob15 = error "Implement me!"
+prob15 tree = if isJust (right tree) then rotate $ fromJust (right tree) else tree
+    where
+        rotate _tree = _tree { left = Just tree { right = left _tree } }
 
 ------------------------------------------------------------
 -- PROBLEM #16
