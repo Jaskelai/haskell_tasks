@@ -70,7 +70,7 @@ prob21 = getDivisors
 -- Подсчитать произведение количеств букв i в словах из
 -- заданной строки (списка символов)
 prob22 :: String -> Integer
-prob22 str = product ( map mapper (words str))
+prob22 str = product (map mapper (words str))
   where
     mapper _str = genericLength (filter (== 'i') _str)
 
@@ -93,11 +93,11 @@ prob23 = error "Implement me!"
 -- (1 <= N <= 10^10)
 prob24 :: Integer -> Bool
 prob24 number = checkSum 1 0
-    where
-        checkSum _num _sum
-            | _sum == number = True
-            | _sum > number = False
-            | otherwise = checkSum (_num + 1) (_sum + _num)
+  where
+    checkSum _num _sum
+      | _sum == number = True
+      | _sum > number = False
+      | otherwise = checkSum (_num + 1) (_sum + _num)
 
 ------------------------------------------------------------
 -- PROBLEM #25
@@ -105,7 +105,13 @@ prob24 number = checkSum 1 0
 -- Проверить, что запись числа является палиндромом (т.е.
 -- читается одинаково слева направо и справа налево)
 prob25 :: Integer -> Bool
-prob25 = error "Implement me!"
+prob25 num = reversal (abs num) == abs num
+
+reversal :: Integral a => a -> a
+reversal = go 0
+  where
+    go a 0 = a
+    go a b = let (q, r) = b `quotRem` 10 in go (a * 10 + r) q
 
 ------------------------------------------------------------
 -- PROBLEM #26
