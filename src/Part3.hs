@@ -10,8 +10,8 @@ import Data.Map (fromListWith, toList)
 prob18 :: Integer -> Bool
 prob18 n
     | n == 1 = False
-    | (length [x | x <- [2 .. n-1], mod n x == 0]) > 0 = False
-    | otherwise = True
+    | n == 2 = True
+    | otherwise = all (\p -> n `mod` p /= 0) (takeWhile (\p -> p * p <= n) (2 : filter prob18 [3, 5 ..]))
 
 ------------------------------------------------------------
 -- PROBLEM #19
