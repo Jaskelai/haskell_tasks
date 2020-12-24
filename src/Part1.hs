@@ -70,11 +70,15 @@ prob3 step n = prob3 step (step n) + 1
 --
 -- Число n по модулю не превосходит 10^5
 prob4 :: Integer -> Integer
-prob4 0 = 1
-prob4 1 = 1
-prob4 (-1) = 0
-prob4 (-2) = 1
-prob4 n = if n > 0 then prob4 (n - 1) + prob4 (n - 2) else prob4 (n + 2) - prob4 (n + 1)
+prob4 n = calcFibonacci (n + 1)
+
+calcFibonacci :: Integer -> Integer
+calcFibonacci n
+  | n >= 0 = iter 0 1 n
+  | otherwise = (-1)^(1-n) * calcFibonacci (-n)
+  where
+    iter x _ 0 = x
+    iter x y counter = iter y (x + y) (counter - 1)
 
 
 ------------------------------------------------------------
