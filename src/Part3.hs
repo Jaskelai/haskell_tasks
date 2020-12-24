@@ -128,7 +128,15 @@ prob26 x y = sum (getDivisors x) == sum (getDivisors y)
 -- Найти в списке два числа, сумма которых равна заданному.
 -- Длина списка не превосходит 500
 prob27 :: Int -> [Int] -> Maybe (Int, Int)
-prob27 = error "Implement me!"
+prob27 _ [] = Nothing
+prob27 _sum (x:xs) = case findComplement _sum x xs of
+    Nothing -> prob27 _sum xs
+    (Just compl) -> Just (x, compl)
+  where
+    findComplement _ _ [] = Nothing
+    findComplement _sum item (_x:_xs)
+      | item + _x == _sum = Just _x
+      | otherwise = findComplement _sum item _xs
 
 ------------------------------------------------------------
 -- PROBLEM #28
