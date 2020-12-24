@@ -125,7 +125,9 @@ prob15 tree = if isJust (right tree) then rotate $ fromJust (right tree) else tr
 -- Выполнить вращение дерева вправо относительно корня
 -- (https://en.wikipedia.org/wiki/Tree_rotation)
 prob16 :: Tree a -> Tree a
-prob16 = error "Implement me!"
+prob16 tree = if isJust (left tree) then rotate $ fromJust (left tree) else tree
+    where
+        rotate _tree = _tree { right = Just tree { left = right _tree } }
 
 ------------------------------------------------------------
 -- PROBLEM #17
