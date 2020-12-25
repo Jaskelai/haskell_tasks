@@ -120,7 +120,21 @@ reversal = go 0
 -- сумма делителей одного (без учёта самого числа) равна
 -- другому, и наоборот
 prob26 :: Integer -> Integer -> Bool
-prob26 x y = sum (getDivisors x) == sum (getDivisors y)
+prob26 x y = sum (_getDivisors x) == x + y && sum (_getDivisors y) == x + y
+
+_getAllDivisors :: Integer -> [Integer] -> [Integer] -> [Integer]
+_getAllDivisors _ [] acc = acc
+_getAllDivisors n (x:xs) acc =
+  let a = (n `div` x)
+  in if a == x
+    then _getAllDivisors n xs acc
+    else _getAllDivisors n xs (a : acc)
+
+_getDivisors :: Integer -> [Integer]
+_getDivisors n = halfDivisors ++ _getAllDivisors n halfDivisors []
+  where
+    halfDivisors = filter isDivisor [1..(roundedCount n)]
+    isDivisor candidate = n `mod` candidate == 0
 
 ------------------------------------------------------------
 -- PROBLEM #27
